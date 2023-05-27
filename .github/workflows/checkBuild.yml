@@ -1,0 +1,25 @@
+name: Testes Após Build
+
+on:
+  workflow_run:
+    workflows: ["Build"]
+    types:
+      - completed
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if build was successful
+        id: check-build
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const buildConclusion = github.workflow_runs[0].conclusion;
+            return buildConclusion === 'success';
+
+      - name: Run tests if build was successful
+        if: steps.check-build.outputs.result == 'true'
+        run: npm run test

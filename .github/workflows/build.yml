@@ -23,3 +23,6 @@ jobs:
 
       - name: Build TypeScript
         run: npm run build
+    
+    outputs:
+      build-conclusion: ${{ job.status }}

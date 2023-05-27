@@ -17,6 +17,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            console.log(github.workflow_runs)
             const buildConclusion = github.workflow_runs[0].conclusion;
             return buildConclusion === 'success';
 

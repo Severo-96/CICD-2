@@ -2,7 +2,7 @@ name: Test Build
 
 on:
   workflow_run:
-    workflows: ["Build"]
+    workflows: ["build"]
     types:
       - completed
 

@@ -14,7 +14,12 @@ jobs:
       - name: Check if build was successful
         id: check-build
         uses: actions/github-script@v4
-        
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const buildConclusion = github.workflow_runs[0].conclusion;
+            return buildConclusion === 'success';
+
       - name: Run tests if build was successful
-        if: ${{ needs.build.outputs.build-conclusion == 'success' }}
+        if: steps.check-build.outputs.check-build == 'true'
         run: npm run test

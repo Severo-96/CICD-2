@@ -16,4 +16,4 @@ jobs:
           node-version: '14'
 
       - name: Test run
-        run: npm test
+        run: npm run test

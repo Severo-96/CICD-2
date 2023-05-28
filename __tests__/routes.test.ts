@@ -41,6 +41,14 @@ describe("POST /todo", () => {
       },
     ]);
   });
+
+  it("Should return error if tarefa is null", async () => {
+    const response = await request
+      .post("/todo")
+      .send({ tarefa: null });
+
+    expect(response.status).toBe(400);
+  });
 });
 
 describe("DELETE /todo/:id", () => {
@@ -62,5 +70,14 @@ describe("DELETE /todo/:id", () => {
         descricao: "tarefa teste 2",
       },
     ]);
+  });
+
+  it("Should return error if id do not exist", async () => {
+    tarefas.push({ id: 10, descricao: "tarefa teste 1" });
+    tarefas.push({ id: 11, descricao: "tarefa teste 2" });
+
+    const response = await request.delete("/todo/999");
+
+    expect(response.status).toBe(404);
   });
 });

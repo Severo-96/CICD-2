@@ -19,10 +19,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Deploy to staging
+      - name: Deploy to production
         env:
           DEPLOYMENT_KEY: ${{ secrets.PRODUCTION }}
-        uses: peter-evans/http-action@v3
+        uses: fjogeleit/http-request-action@v1
         with:
           url: DEPLOYMENT_KEY
           method: POST

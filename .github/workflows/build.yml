@@ -67,4 +67,4 @@ jobs:
           DEPLOYMENT_KEY: ${{ secrets.STAGING }}
         uses: fjogeleit/http-request-action@v1
         with:
-          url: DEPLOYMENT_KEY
+          url: ${{ env.DEPLOYMENT_KEY }}

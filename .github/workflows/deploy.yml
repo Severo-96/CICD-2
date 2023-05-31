@@ -24,4 +24,4 @@ jobs:
           DEPLOYMENT_KEY: ${{ secrets.PRODUCTION }}
         uses: fjogeleit/http-request-action@v1
         with:
-          url: DEPLOYMENT_KEY
+          url: ${{ env.DEPLOYMENT_KEY }}

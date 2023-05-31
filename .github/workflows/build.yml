@@ -1,4 +1,4 @@
-name: Build and Test
+name: Build, Test and Deploy
 
 on:
   push:
@@ -43,3 +43,29 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+        
+  deploy-staging:
+    needs: [build, test]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy to staging
+        env:
+          DEPLOYMENT_KEY: ${{ secrets.STAGING }}
+        uses: peter-evans/http-action@v3
+        with:
+          url: DEPLOYMENT_KEY
+          method: POST

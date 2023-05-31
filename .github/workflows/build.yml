@@ -65,7 +65,7 @@ jobs:
       - name: Deploy to staging
         env:
           DEPLOYMENT_KEY: ${{ secrets.STAGING }}
-        uses: peter-evans/http-action@v3
+        uses: fjogeleit/http-request-action@v1
         with:
           url: DEPLOYMENT_KEY
           method: POST
